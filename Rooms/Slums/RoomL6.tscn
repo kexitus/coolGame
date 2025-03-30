@@ -14,10 +14,10 @@ layer_3/tile_data = PackedInt32Array(720883, 655361, 805306370, 393201, 655361, 
 [node name="Position" type="Marker2D" parent="Entrance" index="0"]
 position = Vector2(0, 208)
 
-[node name="Left" type="Marker2D" parent="Exits" index="0"]
+[node name="Top" type="Marker2D" parent="Exits" index="0"]
 position = Vector2(336, 0)
 
-[node name="Left2" type="Marker2D" parent="Exits" index="1"]
+[node name="Down" type="Marker2D" parent="Exits" index="1"]
 position = Vector2(336, 384)
 
 [node name="Door" type="StaticBody2D" parent="Doors" index="0"]

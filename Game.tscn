@@ -8,7 +8,8 @@
 [node name="Game" type="Node2D"]
 script = ExtResource("1_iscg5")
 
-[node name="UserInterface" parent="." instance=ExtResource("1_ca7y4")]
+[node name="UserInterface" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_ca7y4")]
+player = NodePath("../Player")
 
 [node name="Player" parent="." node_paths=PackedStringArray("special_weapons") instance=ExtResource("4_le562")]
 z_index = 100

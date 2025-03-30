@@ -11,10 +11,10 @@ layer_2/tile_data = PackedInt32Array(262145, 327681, 13, 327681, 327681, 13, 393
 layer_3/tile_data = PackedInt32Array(851969, 589825, 4, 1966082, 851969, 5, 1703940, 720897, 1610612738, 655365, 786433, 1610612739, 1114119, 655361, 3, 458762, 786433, 2, 1441803, 786433, 1610612738, 1703947, 720897, 1610612739, 1507341, 786433, 3, 262159, 786433, 1610612739, 458773, 655361, 3, 1507349, 720897, 1342177283, 1441816, 720897, 3, 983066, 655361, 3, 524319, 851969, 5, 1835039, 720897, 4)
 
 [node name="Position" type="Marker2D" parent="Entrance" index="0"]
-position = Vector2(264, 520)
+position = Vector2(256, 512)
 
 [node name="Top" type="Marker2D" parent="Exits" index="0"]
-position = Vector2(264, 8)
+position = Vector2(256, 8)
 
 [node name="Door" type="StaticBody2D" parent="Doors" index="0"]
-position = Vector2(264, 24)
+position = Vector2(256, 24)

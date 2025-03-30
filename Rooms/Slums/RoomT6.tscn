@@ -17,11 +17,11 @@ position = Vector2(192, 0)
 [node name="Left" type="Marker2D" parent="Exits" index="0"]
 position = Vector2(0, 368)
 
-[node name="Left2" type="Marker2D" parent="Exits" index="1"]
+[node name="Right" type="Marker2D" parent="Exits" index="1"]
 position = Vector2(384, 368)
 
 [node name="Door" type="StaticBody2D" parent="Doors" index="0"]
-position = Vector2(376, 368)
+position = Vector2(8, 368)
 
 [node name="Door2" type="StaticBody2D" parent="Doors" index="1"]
-position = Vector2(8, 368)
+position = Vector2(376, 368)

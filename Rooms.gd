@@ -1,7 +1,8 @@
 extends Node2D
 
 const SPAWN_ROOMS: Array = [preload("res://Rooms/Slums/SpawnRoom1.tscn")]
-const END_ROOMS: Array = [preload("res://Rooms/Slums/EndRoom1T.tscn"), preload("res://Rooms/Slums/EndRoom1R.tscn"), preload("res://Rooms/Slums/EndRoom1B.tscn"), preload("res://Rooms/Slums/EndRoom1L.tscn")]
+const END_ROOMS: Array = [preload("res://Rooms/Slums/EndRoom1T.tscn"), preload("res://Rooms/Slums/EndRoom1R.tscn"), 
+							preload("res://Rooms/Slums/EndRoom1B.tscn"), preload("res://Rooms/Slums/EndRoom1L.tscn")]
 const TOP_ROOMS: Array = [preload("res://Rooms/Slums/Room01T.tscn"), preload("res://Rooms/Slums/Room02T.tscn")]
 const LEFT_ROOMS: Array = [preload("res://Rooms/Slums/Room01L.tscn"), preload("res://Rooms/Slums/Room02L.tscn")]
 const RIGHT_ROOMS: Array = [preload("res://Rooms/Slums/Room01R.tscn"), preload("res://Rooms/Slums/Room02R.tscn")]
