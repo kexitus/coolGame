@@ -105,8 +105,9 @@ _data = {
 &"shoot_recovery": SubResource("Animation_k45ye")
 }
 
-[node name="Hobo" instance=ExtResource("1_ffalr")]
+[node name="Hobo" node_paths=PackedStringArray("bottle") instance=ExtResource("1_ffalr")]
 script = ExtResource("2_ijmwo")
+bottle = NodePath("Weapon")
 
 [node name="BodyStateMachine" type="Node" parent="StateMachines" index="0" node_paths=PackedStringArray("character", "animationPlayer", "initial_state")]
 script = ExtResource("3_7o4xr")

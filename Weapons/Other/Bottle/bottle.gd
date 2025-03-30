@@ -20,6 +20,7 @@ func shoot(angle: float) -> void:
 	current_proj.position = self.position
 	current_proj.visible = true
 	current_proj.rotation = angle
-	get_parent().add_child(current_proj)
+	current_proj.global_position = self.global_position
+	get_tree().current_scene.add_child(current_proj)
 	if animationPlayer:
 		$AnimationPlayer.play("shoot_recovery")

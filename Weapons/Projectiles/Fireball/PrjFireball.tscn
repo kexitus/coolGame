@@ -138,4 +138,10 @@ collision_mask = 7
 shape = SubResource("CircleShape2D_nainq")
 debug_color = Color(1, 0, 0, 0.419608)
 
+[node name="RemovalTimer" type="Timer" parent="."]
+wait_time = 60.0
+one_shot = true
+autostart = true
+
 [connection signal="body_entered" from="FireballHitbox" to="." method="_on_fireball_hitbox_body_entered"]
+[connection signal="timeout" from="RemovalTimer" to="." method="_on_removal_timer_timeout"]

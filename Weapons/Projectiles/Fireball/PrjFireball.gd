@@ -36,3 +36,8 @@ func _on_fireball_hitbox_body_entered(body:Node2D) -> void:
 	if body is Entity and entity_blacklist.has(body):
 		return
 	explode()
+
+
+func _on_removal_timer_timeout() -> void:
+	explode()
+	

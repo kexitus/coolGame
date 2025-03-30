@@ -20,3 +20,7 @@ func _on_hitbox_body_entered(body) -> void:
 		queue_free()
 	if body is EntityPlayer:
 		body.take_damage(damage)
+
+
+func _on_removal_timer_timeout() -> void:
+	queue_free()
