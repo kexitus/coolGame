@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5motob0s7m2k"]
+
+[ext_resource type="Script" uid="uid://bionqak154dhx" path="res://Weapons/Special/Fireball/WpnFireball.gd" id="1_o2u2l"]
+[ext_resource type="Texture2D" uid="uid://bggh7wxhdrjye" path="res://Weapons/Special/Fireball/Fireball_Icon(WIP).png" id="2_u1mob"]
+[ext_resource type="PackedScene" uid="uid://c6i2deukqa7ga" path="res://Weapons/Projectiles/Fireball/PrjFireball.tscn" id="3_mxdoy"]
+
+[node name="WpnFireball" type="Node"]
+script = ExtResource("1_o2u2l")
+display_name = "Fireball"
+icon = ExtResource("2_u1mob")
+projectile = ExtResource("3_mxdoy")
+damage = 20.0
+metadata/_custom_type_script = "uid://bfwhtj2mpgngh"

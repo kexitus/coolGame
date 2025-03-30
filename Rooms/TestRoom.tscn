@@ -5,8 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://scm5ocupjncd" path="res://UI/UserInterface.tscn" id="1_wwr3s"]
 [ext_resource type="PackedScene" uid="uid://bu172clhhjfrv" path="res://Characters/Player/Player.tscn" id="2_eif7t"]
 [ext_resource type="PackedScene" uid="uid://bcsu46jn18v84" path="res://Characters/Enemies/Hobo/hobo.tscn" id="3_0k34h"]
-[ext_resource type="PackedScene" uid="uid://c3a8fddvup3xl" path="res://UI/InfoEntity.tscn" id="5_6to27"]
-[ext_resource type="PackedScene" uid="uid://bmwp5mrqqynno" path="res://Characters/Enemies/Skeleton/skeleton.tscn" id="7_hqf65"]
+[ext_resource type="PackedScene" uid="uid://c3a8fddvup3xl" path="res://UI/InfoPlayer.tscn" id="5_6to27"]
+[ext_resource type="PackedScene" uid="uid://bmwp5mrqqynno" path="res://Characters/Enemies/Skeleton/Skeleton.tscn" id="7_hqf65"]
 [ext_resource type="PackedScene" uid="uid://h83j15dc6d6p" path="res://Characters/Enemies/Rat/rat.tscn" id="8_fc275"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lec7d"]
@@ -313,7 +313,8 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-768, -336, -768, 304, 
 [node name="TestRoom" type="Node2D"]
 script = ExtResource("1_bpg6h")
 
-[node name="UserInterface" parent="." instance=ExtResource("1_wwr3s")]
+[node name="UserInterface" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_wwr3s")]
+player = NodePath("../Player")
 
 [node name="TileMap" type="Node2D" parent="."]
 z_index = -1
@@ -336,44 +337,41 @@ tile_set = SubResource("TileSet_i7w35")
 visible = false
 navigation_polygon = SubResource("NavigationPolygon_ba8r4")
 
-[node name="Player" parent="." instance=ExtResource("2_eif7t")]
-z_index = 1
+[node name="Player" parent="." node_paths=PackedStringArray("special_weapons") instance=ExtResource("2_eif7t")]
 position = Vector2(-39, -1)
+special_weapons = [NodePath("Weapons/WpnFireball"), null, null]
 
-[node name="InfoEntity" parent="Player" node_paths=PackedStringArray("entity") instance=ExtResource("5_6to27")]
+[node name="InfoPlayer" parent="Player" node_paths=PackedStringArray("player") instance=ExtResource("5_6to27")]
 offset_left = -64.0
 offset_top = 35.0
 offset_right = -44.0
 offset_bottom = 55.0
-entity = NodePath("..")
+player = NodePath("..")
+show_body_state = false
+show_invulnerability_state = false
+show_hands_state = false
 
 [node name="Hobo" parent="." instance=ExtResource("3_0k34h")]
-z_index = 1
 position = Vector2(242, -192)
 movement_speed = 30.0
 
 [node name="Hobo2" parent="." instance=ExtResource("3_0k34h")]
-z_index = 1
 position = Vector2(416, -10)
 movement_speed = 30.0
 
 [node name="Hobo3" parent="." instance=ExtResource("3_0k34h")]
-z_index = 1
 position = Vector2(540, -192)
 movement_speed = 30.0
 
 [node name="Hobo4" parent="." instance=ExtResource("3_0k34h")]
-z_index = 1
 position = Vector2(695, -11)
 movement_speed = 30.0
 
 [node name="Hobo5" parent="." instance=ExtResource("3_0k34h")]
-z_index = 1
 position = Vector2(543, 210)
 movement_speed = 30.0
 
 [node name="Hobo6" parent="." instance=ExtResource("3_0k34h")]
-z_index = 1
 position = Vector2(237, 212)
 movement_speed = 30.0
 
@@ -408,4 +406,4 @@ position = Vector2(-263, -271)
 position = Vector2(-76, -268)
 
 [node name="Rat6" parent="." instance=ExtResource("8_fc275")]
-position = Vector2(108, -268)
+position = Vector2(241, -203)

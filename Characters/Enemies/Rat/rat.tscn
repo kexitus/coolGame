@@ -57,18 +57,11 @@ animationPlayer = NodePath("../../../Animation/BodyAnimation")
 [node name="BodyAnimation" type="AnimationPlayer" parent="Animation" index="0"]
 root_node = NodePath("../../Character")
 libraries = {
-"": ExtResource("2_prix0")
+&"": ExtResource("2_prix0")
 }
 
 [node name="Character" parent="." index="3"]
 texture = ExtResource("3_si6jf")
-frame = 2
-
-[node name="CollisionShape2D" parent="." index="4"]
-visible = false
-
-[node name="HitBox" parent="." index="5"]
-visible = false
 
 [node name="Navigation" parent="." index="6"]
 visible = true

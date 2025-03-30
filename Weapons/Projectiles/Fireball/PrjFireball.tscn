@@ -1,0 +1,253 @@
+[gd_scene load_steps=13 format=3 uid="uid://c6i2deukqa7ga"]
+
+[ext_resource type="Script" uid="uid://ba1d4u3vvp2gn" path="res://Weapons/Projectiles/Fireball/PrjFireball.gd" id="1_lkog3"]
+[ext_resource type="Texture2D" uid="uid://bmag7880jpo4x" path="res://Weapons/Projectiles/Fireball/Fireball.png" id="2_4ravy"]
+[ext_resource type="Texture2D" uid="uid://dxr0c6kwhur3x" path="res://Weapons/Projectiles/Fireball/Explosion.png" id="3_4ravy"]
+[ext_resource type="AudioStream" uid="uid://b2i1c2ckyl8xw" path="res://SFX/FireAttacks/EM_FIRE_IMPACT_01.ogg" id="4_rtyvo"]
+[ext_resource type="AudioStream" uid="uid://ck3uyod8cgngn" path="res://SFX/FireAttacks/EM_FIRE_HOLD_4s.ogg" id="5_sgp3c"]
+[ext_resource type="AudioStream" uid="uid://dhwwkpa2ouj23" path="res://SFX/FireAttacks/EM_FIRE_LAUNCH_01.ogg" id="6_bdfl7"]
+
+[sub_resource type="Animation" id="Animation_evr1j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../ExplosionSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [29]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Audio/Impact:volume_db")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Audio/Impact:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Audio/Hold:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_2x6kl"]
+resource_name = "explosion"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../ExplosionSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3, 0.333333, 0.366667, 0.4, 0.433333, 0.466667, 0.5, 0.533333, 0.566667, 0.6, 0.633333, 0.666667, 0.7, 0.733333, 0.766667, 0.8, 0.833333, 0.866667, 0.9, 0.933333, 0.966667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Audio/Impact:volume_db")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 1),
+"transitions": PackedFloat32Array(1, 4.43828, 1),
+"update": 0,
+"values": [0.0, 0.0, -80.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Audio/Impact:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Audio/Hold:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_yfdpw"]
+resource_name = "loop"
+loop_mode = 1
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0166667, 0.0333333, 0.05, 0.0666667, 0.0833333, 0.1, 0.116667, 0.133333, 0.15, 0.166667, 0.183333, 0.2, 0.216667, 0.233333, 0.25, 0.266667, 0.283333, 0.3, 0.316667, 0.333333, 0.35, 0.366667, 0.383333, 0.4, 0.416667, 0.433333, 0.45, 0.466667, 0.483333, 0.5, 0.516667, 0.533333, 0.55, 0.566667, 0.583333, 0.6, 0.616667, 0.633333, 0.65, 0.666667, 0.683333, 0.7, 0.716667, 0.733333, 0.75, 0.766667, 0.783333, 0.8, 0.816667, 0.833333, 0.85, 0.866667, 0.883333, 0.9, 0.916667, 0.933333, 0.95, 0.966667, 0.983333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Audio/Hold:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2x6kl"]
+_data = {
+&"RESET": SubResource("Animation_evr1j"),
+&"explosion": SubResource("Animation_2x6kl"),
+&"loop": SubResource("Animation_yfdpw")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_guyak"]
+radius = 7.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nainq"]
+radius = 15.0
+
+[node name="PrjFireball" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "hitbox", "animation_player")]
+collision_layer = 8
+collision_mask = 7
+script = ExtResource("1_lkog3")
+sprite = NodePath("FireballSprite")
+hitbox = NodePath("FireballHitbox")
+animation_player = NodePath("AnimationPlayer")
+speed = 300.0
+damage = 10.0
+metadata/_custom_type_script = "uid://ca5s2n0cj45vh"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../FireballSprite")
+libraries = {
+&"": SubResource("AnimationLibrary_2x6kl")
+}
+
+[node name="FireballSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_4ravy")
+offset = Vector2(-18, -0.5)
+hframes = 8
+vframes = 8
+region_rect = Rect2(0, 0, 54, 33)
+
+[node name="ExplosionSprite" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
+texture = ExtResource("3_4ravy")
+offset = Vector2(-2.5, -5)
+hframes = 6
+vframes = 5
+frame = 29
+
+[node name="Audio" type="Node2D" parent="."]
+
+[node name="Impact" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("4_rtyvo")
+max_distance = 1000.0
+attenuation = 4.0
+
+[node name="Hold" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("5_sgp3c")
+max_distance = 1000.0
+attenuation = 4.0
+parameters/looping = true
+
+[node name="Lauch" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("6_bdfl7")
+max_distance = 1000.0
+attenuation = 4.0
+
+[node name="FireballHitbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 7
+
+[node name="FireballCollision" type="CollisionShape2D" parent="FireballHitbox"]
+shape = SubResource("CircleShape2D_guyak")
+
+[node name="ExplosionHitbox" type="Area2D" parent="."]
+scale = Vector2(3, 3)
+collision_layer = 8
+collision_mask = 7
+
+[node name="ExplosionCollision" type="CollisionShape2D" parent="ExplosionHitbox"]
+shape = SubResource("CircleShape2D_nainq")
+debug_color = Color(1, 0, 0, 0.419608)
+
+[node name="RemovalTimer" type="Timer" parent="."]
+wait_time = 60.0
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="FireballHitbox" to="." method="_on_fireball_hitbox_body_entered"]
+[connection signal="timeout" from="RemovalTimer" to="." method="_on_removal_timer_timeout"]

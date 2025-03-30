@@ -34,39 +34,49 @@ texture = ExtResource("2_tch34")
 expand_mode = 2
 stretch_mode = 4
 
+[node name="BasicWeaponIcon" type="TextureRect" parent="WeaponBar/SlotIcon"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
 [node name="Control" type="Control" parent="WeaponBar"]
 custom_minimum_size = Vector2(4, 0)
 layout_mode = 2
 
 [node name="SlotIcon2" type="TextureRect" parent="WeaponBar"]
 layout_mode = 2
-texture = ExtResource("2_tch34")
-expand_mode = 2
-stretch_mode = 4
-
-[node name="SpecialBar" type="HBoxContainer" parent="."]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 44.8
-offset_top = -760.8
-offset_right = 136.8
-offset_bottom = -720.8
-grow_vertical = 0
-pivot_offset = Vector2(0, 40)
-
-[node name="SlotIcon" type="TextureRect" parent="SpecialBar"]
-layout_mode = 2
 texture = ExtResource("3_m4f4h")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="Control" type="Control" parent="SpecialBar"]
+[node name="SpecialWeaponIcon" type="TextureRect" parent="WeaponBar/SlotIcon2"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Control2" type="Control" parent="WeaponBar"]
 custom_minimum_size = Vector2(4, 0)
 layout_mode = 2
 
-[node name="SlotIcon2" type="TextureRect" parent="SpecialBar"]
+[node name="SlotIcon3" type="TextureRect" parent="WeaponBar"]
 layout_mode = 2
 texture = ExtResource("3_m4f4h")
 expand_mode = 2
 stretch_mode = 4
+
+[node name="SpecialWeaponIcon" type="TextureRect" parent="WeaponBar/SlotIcon3"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Control3" type="Control" parent="WeaponBar"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+
+[node name="SlotIcon4" type="TextureRect" parent="WeaponBar"]
+layout_mode = 2
+texture = ExtResource("3_m4f4h")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="SpecialWeaponIcon" type="TextureRect" parent="WeaponBar/SlotIcon4"]
+offset_right = 40.0
+offset_bottom = 40.0

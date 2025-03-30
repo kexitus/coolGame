@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://b3vl21q1snnti"]
+
+[ext_resource type="Texture2D" uid="uid://cuyi8u6e1ro75" path="res://Weapons/Projectiles/Bottle/Bottle.png" id="1_11gco"]
+[ext_resource type="Script" uid="uid://qhnt3ehvu7l7" path="res://Weapons/Other/Bottle/bottle.gd" id="1_dm6bt"]
+[ext_resource type="PackedScene" uid="uid://dwnf566m3iflb" path="res://Weapons/Projectiles/Bottle/Bottle.tscn" id="2_fhqo3"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_faa8c"]
+radius = 3.0
+height = 8.0
+
+[node name="Bottle" type="Node2D"]
+script = ExtResource("1_dm6bt")
+projectile = ExtResource("2_fhqo3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 3)
+texture = ExtResource("1_11gco")
+hframes = 2
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0, 3)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -1)
+shape = SubResource("CapsuleShape2D_faa8c")
+disabled = true

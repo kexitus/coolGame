@@ -5,22 +5,40 @@ extends Entity
 @export var invulnerability_state_machine: FiniteStateMachine
 @export var hands_state_machine: FiniteStateMachine
 
-#@export var invulnerability_animation: AnimationPlayer
-#@export var hands_animation: AnimationPlayer
 @export var invulnerability_timer: Timer
+
+@export var cast_marker: Marker2D
+
+@onready var signs_visualizer: SignsVisualizer = $SignsVisualizer
 
 @export var max_mana: float = 10.0
 var mana: float = max_mana
 var money: int = 0
 var signs: Array[GlobalData.SIGNS] = []
 var basic_weapons: Array[WeaponBasic] = []
-var special_weapons: Array[WeaponSpecial] = []
 var items: Array[Item] = []
+
+@export_group("Weapons")
 @export var basic_weapon: WeaponBasic # testing
+@export var special_weapons: Array[WeaponSpecial] = []
+
+@export_group("")
+
+signal signs_changed(new_signs: Array[GlobalData.SIGNS])
+signal basic_weapon_changed(new_weapon: WeaponBasic)
+signal using_special_weapon(special_weapon: WeaponSpecial)
+signal special_weapon_changed(new_weapon: WeaponSpecial, index: int)
 
 
 func _ready() -> void:
-	pass
+	if basic_weapon:
+		basic_weapon_changed.emit(basic_weapon) # testing
+
+	var index: int = 0
+	for special_weapon in special_weapons:
+		if special_weapon:
+			special_weapon_changed.emit(special_weapon, index)
+			index += 1
 
 
 func _process(_delta: float) -> void:
@@ -43,6 +61,7 @@ func _input(event: InputEvent) -> void:
 		handle_sign(GlobalData.SIGNS.YOU)
 
 
+#region Movement and Look
 # :Entity.
 func handle_movement(_delta: float) -> void:
 	var direction = Input.get_vector("controls_left", "controls_right", "controls_up", "controls_down")
@@ -66,31 +85,72 @@ func dodge(direction: Vector2) -> void:
 	velocity = velocity.lerp(direction.normalized() * movement_speed * 100, acceleration)
 
 
-# :Entity.
-func update_animation(_delta: float) -> void:
-	pass
+func handle_look() -> void:
+	var mouse := get_local_mouse_position()
+	facing_direction = mouse.normalized()
+	var angle := snappedf(-mouse.angle(), PI/4) / (PI/4)
+	angle = wrapi(int(angle), 0, 8)
+	var frame := wrapi(int(angle - 6.0), 0, 8)
+	sprite.frame = frame
+
+	#FIXME Временный зум
+	if Input.is_action_just_released("controls_mouse_wheel_up"):
+		$Camera2D.zoom += Vector2(0.1, 0.1)
+	if Input.is_action_just_released("controls_mouse_wheel_down"):
+		$Camera2D.zoom -= Vector2(0.1, 0.1)
+
+#endregion
 
 
-# :Entity.
-func get_interaction() -> void:
-	pass
-
-
+#region Battle system
+# Handles basic attack input
 func handle_basic_attack() -> void:
 	if Input.is_action_pressed("controls_base_attack"):
-		basic_weapon.attack()
+		basic_weapon.attack(cast_marker.global_position, get_global_mouse_position())
 	elif Input.is_action_just_released("controls_base_attack"):
 		basic_weapon.stop_attack()
 
 
+# Handles sign input
 func handle_sign(new_sign: GlobalData.SIGNS) -> void:
 	signs.append(new_sign)
-	print("Sign " + str(new_sign))
+	signs_changed.emit(signs)
 	if signs.size() == 3:
-		print("Got 3 signs: %s %s %s. Clearing..." % signs)
+		handle_special_attack(signs)
 		signs.clear()
+		signs_changed.emit(signs)
 
 
+# Checks for owned special weapon and casts it
+func handle_special_attack(combo: Array[GlobalData.SIGNS]) -> void:
+	var weapon: WeaponSpecial = find_weapon(combo)
+	if weapon:
+		using_special_weapon.emit(weapon)
+		weapon.attack(cast_marker.global_position, get_global_mouse_position())
+
+
+# Finds special weapon by combo sequence
+func find_weapon(combo: Array[GlobalData.SIGNS]) -> WeaponSpecial:
+	var found_weapon: WeaponSpecial = null
+	var combo_size: int = combo.size()
+	var counter: int
+	for special_weapon in special_weapons:
+		if ! special_weapon:
+			continue
+		counter = 0
+		for i in range(combo_size):
+			if special_weapon.combo_sequence[i] != combo[i]:
+				break
+			counter += 1
+		if counter == combo_size:
+			found_weapon = special_weapon
+			break
+	return found_weapon
+
+#endregion
+
+
+#region Damage system
 # :Entity.
 func take_damage(amount: float) -> void:
 	if is_invulnerable:
@@ -117,20 +177,17 @@ func die() -> void:
 	died.emit()
 
 
-func handle_look() -> void:
-	var mouse := get_local_mouse_position()
-	facing_direction = mouse.normalized()
-	var angle := snappedf(-mouse.angle(), PI/4) / (PI/4)
-	angle = wrapi(int(angle), 0, 8)
-	var frame := wrapi(int(angle - 6.0), 0, 8)
-	sprite.frame = frame
-
-	#FIXME Временный зум
-	if Input.is_action_just_released("controls_mouse_wheel_up"):
-		$Camera2D.zoom += Vector2(0.1, 0.1)
-	if Input.is_action_just_released("controls_mouse_wheel_down"):
-		$Camera2D.zoom -= Vector2(0.1, 0.1)
-
-
 func _on_invulnerabity_timer_timeout() -> void:
 	is_invulnerable = false
+
+#endregion
+
+
+# :Entity.
+func update_animation(_delta: float) -> void:
+	pass
+
+
+# :Entity.
+func get_interaction() -> void:
+	pass

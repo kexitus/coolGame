@@ -4,19 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://drebu272aejek" path="res://Weapons/Basic/Firebreath/Firebreath-Icon(WIP).png" id="2_66ew5"]
 [ext_resource type="PackedScene" uid="uid://b53mu6fxsqo6b" path="res://Weapons/Projectiles/Firebreath/Firebreath.tscn" id="3_csvup"]
 
-[node name="Firebreath" type="Node2D" node_paths=PackedStringArray("attack_timer", "icon", "projectile")]
+[node name="Firebreath" type="Node2D" node_paths=PackedStringArray("attack_timer")]
 script = ExtResource("1_bet6e")
 attack_timer = NodePath("AttackTimer")
-icon = NodePath("Icon")
-projectile = NodePath("Projectile")
-
-[node name="Icon" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("2_66ew5")
+display_name = "Firebreath"
+icon = ExtResource("2_66ew5")
+projectile = ExtResource("3_csvup")
 
 [node name="AttackTimer" type="Timer" parent="."]
-
-[node name="Projectile" parent="." instance=ExtResource("3_csvup")]
-visible = false
 
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

@@ -1,5 +1,12 @@
 extends CanvasLayer
 
+
+@export var player: EntityPlayer
+@onready var basic_weapon_icon: TextureRect = $WeaponBar/SlotIcon/BasicWeaponIcon
+@onready var special_weapon_icon_1: TextureRect = $WeaponBar/SlotIcon2/SpecialWeaponIcon
+@onready var special_weapon_icon_2: TextureRect = $WeaponBar/SlotIcon3/SpecialWeaponIcon
+@onready var special_weapon_icon_3: TextureRect = $WeaponBar/SlotIcon4/SpecialWeaponIcon
+
 var heart_dictionary: Dictionary = {
 	"RED": Rect2(Vector2(0, 0), Vector2(16, 16)),
 	"RED_SEMI": Rect2(Vector2(16, 0), Vector2(16, 16)),
@@ -55,6 +62,20 @@ func _ready():
 	#print(str(atlas_image.get_load_path()))
 	atlas.atlas = atlas_image
 	#var region = Rect2(Vector2(0, 0), Vector2(16, 16))  
+
+	player.basic_weapon_changed.connect(func(new_weapon: WeaponBasic):
+		basic_weapon_icon.texture = new_weapon.icon
+	)
+	player.special_weapon_changed.connect(func(new_weapon: WeaponSpecial, index: int):
+		match index:
+			0:
+				special_weapon_icon_1.texture = new_weapon.icon
+			1:
+				special_weapon_icon_2.texture = new_weapon.icon
+			2:
+				special_weapon_icon_3.texture = new_weapon.icon
+	)
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):

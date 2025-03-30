@@ -9,7 +9,7 @@ extends CharacterBody2D
 @export var damage: float = 1.0
 
 var sender: Entity
-var move_direction: Vector2 = Vector2.ZERO
+# var move_direction: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	pass
@@ -20,4 +20,5 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	pass
+	velocity = velocity.lerp(Vector2.from_angle(rotation) * speed, 1)
+	move_and_slide()

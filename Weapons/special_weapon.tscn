@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://kfh5k3p34x58"]
-
-[ext_resource type="PackedScene" uid="uid://bh6nn2w1pkl0x" path="res://Weapons/weapon.tscn" id="1_ounme"]
-[ext_resource type="Script" uid="uid://dgvwvwckaex16" path="res://Weapons/special_weapon.gd" id="2_brfop"]
-
-[node name="SpecialWeapon" instance=ExtResource("1_ounme")]
-script = ExtResource("2_brfop")
-cooldown = 0

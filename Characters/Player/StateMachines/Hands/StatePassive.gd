@@ -2,7 +2,7 @@ extends State
 
 
 func enter():
-	animationPlayer.play("RESET")
+	pass
 
 func exit():
 	pass

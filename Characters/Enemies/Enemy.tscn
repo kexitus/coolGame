@@ -14,8 +14,9 @@ radius = 6.10687
 font_size = 12
 
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("navigation_agent", "aggro_area", "sprite", "hitbox")]
+z_index = 1
 collision_layer = 4
-collision_mask = 3
+collision_mask = 5
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_335ko")

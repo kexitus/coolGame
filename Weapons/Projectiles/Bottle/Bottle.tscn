@@ -1,0 +1,77 @@
+[gd_scene load_steps=7 format=3 uid="uid://dwnf566m3iflb"]
+
+[ext_resource type="Texture2D" uid="uid://cuyi8u6e1ro75" path="res://Weapons/Projectiles/Bottle/Bottle.png" id="1_qyhpn"]
+[ext_resource type="Script" uid="uid://dcaky1stp4ed0" path="res://Weapons/Projectiles/Bottle/bottle.gd" id="1_uap3l"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jec3i"]
+radius = 5.0
+
+[sub_resource type="Animation" id="Animation_tlmlh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_i7acg"]
+resource_name = "spin"
+length = 0.4
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 1.5708, 3.14159, 4.71239, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k5cpm"]
+_data = {
+&"RESET": SubResource("Animation_tlmlh"),
+&"spin": SubResource("Animation_i7acg")
+}
+
+[node name="Bottle" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "hitbox", "animation_player")]
+collision_layer = 8
+script = ExtResource("1_uap3l")
+sprite = NodePath("Sprite2D")
+hitbox = NodePath("Hitbox")
+animation_player = NodePath("AnimationPlayer")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_qyhpn")
+hframes = 2
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_jec3i")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_k5cpm")
+}
+
+[node name="RemovalTimer" type="Timer" parent="."]
+wait_time = 60.0
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="timeout" from="RemovalTimer" to="." method="_on_removal_timer_timeout"]

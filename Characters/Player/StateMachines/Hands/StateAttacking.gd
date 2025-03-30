@@ -2,11 +2,11 @@ extends State
 
 
 func enter():
-	animationPlayer.play("Hands/cast")
+	animationPlayer.play("Hands/cast_start")
 
 func exit():
-	animationPlayer.stop()
+	animationPlayer.play("Hands/cast_end")
 
 func _update(_delta:float):
-	pass
-
+	if ! animationPlayer.is_playing():
+		animationPlayer.play("Hands/cast_loop")

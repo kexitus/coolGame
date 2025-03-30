@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bu172clhhjfrv"]
+[gd_scene load_steps=36 format=3 uid="uid://bu172clhhjfrv"]
 
 [ext_resource type="Script" uid="uid://ne6fgbif3nal" path="res://Characters/Player/EntityPlayer.gd" id="1_mdg8t"]
 [ext_resource type="Script" uid="uid://bdw5cx2lw0qdq" path="res://Characters/StateMachineBase/FiniteStateMachine.gd" id="2_jsp3y"]
@@ -11,7 +11,6 @@
 [ext_resource type="Script" uid="uid://25jx7762t8vf" path="res://Characters/Player/StateMachines/Body/RuleToDodging.gd" id="5_22cm5"]
 [ext_resource type="AnimationLibrary" uid="uid://dag2q0mfsaho0" path="res://Characters/Player/BodyAnimationLib.res" id="5_rjesq"]
 [ext_resource type="AnimationLibrary" uid="uid://8goc0vvs6fj6" path="res://Characters/Player/InvulnerabilityAnimationLib.res" id="6_0t768"]
-[ext_resource type="PackedScene" uid="uid://scm5ocupjncd" path="res://UI/UserInterface.tscn" id="6_cnykm"]
 [ext_resource type="Script" uid="uid://du0vckiipavxt" path="res://Characters/Player/StateMachines/Body/RuleToIdle.gd" id="6_tdpdd"]
 [ext_resource type="Script" uid="uid://boetj0us8qa3y" path="res://Characters/Player/StateMachines/Body/StateDodging.gd" id="7_d3kft"]
 [ext_resource type="AnimationLibrary" uid="uid://xvm7pub6d2e4" path="res://Characters/Player/HandsAnimationLib.res" id="7_ihk8h"]
@@ -26,6 +25,8 @@
 [ext_resource type="Script" uid="uid://c43vk2m0gdbnc" path="res://Characters/Player/StateMachines/Hands/RuleToAttacking.gd" id="15_1dgtb"]
 [ext_resource type="Script" uid="uid://pte77ci27t74" path="res://Characters/Player/StateMachines/Hands/StateAttacking.gd" id="15_qvoiu"]
 [ext_resource type="Script" uid="uid://cinhokgwh037k" path="res://Characters/Player/StateMachines/Hands/RuleToPassive.gd" id="17_oc3cy"]
+[ext_resource type="Script" uid="uid://bc13vcbqk42o1" path="res://Characters/Player/SignsVisualizer.gd" id="25_mvuje"]
+[ext_resource type="PackedScene" uid="uid://b5motob0s7m2k" path="res://Weapons/Special/Fireball/WpnFireball.tscn" id="26_11ayp"]
 
 [sub_resource type="Animation" id="Animation_epsh5"]
 length = 0.001
@@ -227,7 +228,8 @@ height = 14.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_rx7k8"]
 radius = 14.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("body_state_machine", "invulnerability_state_machine", "hands_state_machine", "invulnerability_timer", "basic_weapon", "sprite")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("body_state_machine", "invulnerability_state_machine", "hands_state_machine", "invulnerability_timer", "cast_marker", "basic_weapon", "special_weapons", "sprite")]
+z_index = 1
 collision_layer = 2
 collision_mask = 35
 script = ExtResource("1_mdg8t")
@@ -235,7 +237,9 @@ body_state_machine = NodePath("StateMachines/BodyStateMachine")
 invulnerability_state_machine = NodePath("StateMachines/InvulnerabilityStateMachine")
 hands_state_machine = NodePath("StateMachines/HandsStateMachine")
 invulnerability_timer = NodePath("Timers/InvulnerabityTimer")
+cast_marker = NodePath("CastMarker")
 basic_weapon = NodePath("Weapons/BasicWeapon/Firebreath")
+special_weapons = [NodePath("Weapons/WpnFireball"), null, null]
 sprite = NodePath("Character")
 display_name = "Player"
 
@@ -408,6 +412,9 @@ hframes = 2
 vframes = 2
 frame = 1
 
+[node name="SignsVisualizer" type="Node2D" parent="."]
+script = ExtResource("25_mvuje")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_erdxr")
@@ -423,6 +430,9 @@ position = Vector2(0, -2)
 shape = SubResource("CircleShape2D_rx7k8")
 debug_color = Color(0.883355, 0.000325556, 0.813666, 0.42)
 
+[node name="CastMarker" type="Marker2D" parent="."]
+position = Vector2(0, -23)
+
 [node name="Weapons" type="Node2D" parent="."]
 
 [node name="BasicWeapon" type="Node2D" parent="Weapons"]
@@ -430,11 +440,15 @@ debug_color = Color(0.883355, 0.000325556, 0.813666, 0.42)
 [node name="Firebreath" parent="Weapons/BasicWeapon" node_paths=PackedStringArray("player") instance=ExtResource("11_ol4qr")]
 player = NodePath("../../..")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="WpnFireball" parent="Weapons" node_paths=PackedStringArray("player") instance=ExtResource("26_11ayp")]
+player = NodePath("../..")
 
-[node name="UserInterface" parent="." instance=ExtResource("6_cnykm")]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+current = true
 
 [connection signal="timeout" from="Timers/InvulnerabityTimer" to="." method="_on_invulnerabity_timer_timeout"]
