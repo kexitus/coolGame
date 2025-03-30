@@ -67,8 +67,8 @@ texture = ExtResource("2_bqr2g")
 [node name="CollisionShape2D" parent="." index="4"]
 visible = false
 
-[node name="HitBox" parent="." index="5"]
-visible = false
-
 [node name="Navigation" parent="." index="6"]
+visible = true
+
+[node name="Aggr" parent="." index="7"]
 visible = true
