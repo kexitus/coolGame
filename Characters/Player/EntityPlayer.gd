@@ -27,11 +27,18 @@ var items: Array[Item] = []
 signal signs_changed(new_signs: Array[GlobalData.SIGNS])
 signal basic_weapon_changed(new_weapon: WeaponBasic)
 signal using_special_weapon(special_weapon: WeaponSpecial)
+signal special_weapon_changed(new_weapon: WeaponSpecial, index: int)
 
 
 func _ready() -> void:
 	if basic_weapon:
 		basic_weapon_changed.emit(basic_weapon) # testing
+
+	var index: int = 0
+	for special_weapon in special_weapons:
+		if special_weapon:
+			special_weapon_changed.emit(special_weapon, index)
+			index += 1
 
 
 func _process(_delta: float) -> void:
