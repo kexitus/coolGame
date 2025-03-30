@@ -3,8 +3,10 @@ class_name SignHover
 
 @export var index: int
 @export var current_sign: GlobalData.SIGNS
-@export var sign_sprite: Sprite2D
+@export var sign_sprite: Sprite2D	
 @export var animation_player: AnimationPlayer
+
+@onready var animation_player2: AnimationPlayer = $AnimationPlayer2
 
 func _ready() -> void:
 	sign_sprite.frame = current_sign
@@ -21,6 +23,7 @@ func _ready() -> void:
 
 
 func disappear() -> void:
+	animation_player2.stop()
 	match index:
 		0:
 			animation_player.play("disappear_left")
@@ -32,6 +35,7 @@ func disappear() -> void:
 
 func _on_animation_finished(anim_name: String) -> void:
 	if anim_name == "spawn_left" || anim_name == "spawn_middle" || anim_name == "spawn_right":
+		animation_player2.play("loop")
 		match index:
 			0:
 				animation_player.play("loop_left")
