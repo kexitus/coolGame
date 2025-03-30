@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://b53mu6fxsqo6b"]
+[gd_scene load_steps=10 format=3 uid="uid://b53mu6fxsqo6b"]
 
 [ext_resource type="Script" uid="uid://5k4uhvypa3mn" path="res://Weapons/Projectiles/Firebreath/Firebreath.gd" id="1_tgjvp"]
 [ext_resource type="Texture2D" uid="uid://ctcx61p2fqnk3" path="res://Weapons/Projectiles/Firebreath/fire_column_medium_sheet.png" id="2_bpgv1"]
+[ext_resource type="AudioStream" uid="uid://ck3uyod8cgngn" path="res://SFX/FireAttacks/EM_FIRE_HOLD_4s.ogg" id="3_ed3dx"]
 
 [sub_resource type="Animation" id="Animation_7rs4n"]
 length = 0.001
@@ -290,6 +291,14 @@ root_node = NodePath("../Sprite2D")
 libraries = {
 &"": SubResource("AnimationLibrary_xwtpp")
 }
+
+[node name="Audio" type="Node2D" parent="."]
+
+[node name="Hold" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("3_ed3dx")
+max_distance = 1000.0
+attenuation = 4.0
+parameters/looping = true
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 0

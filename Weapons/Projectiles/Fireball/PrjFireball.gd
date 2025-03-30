@@ -7,6 +7,7 @@ class_name PrjFireball
 @onready var explosion_hitbox: Area2D = $ExplosionHitbox
 @onready var fireball_collision: CollisionShape2D = $FireballHitbox/FireballCollision
 @onready var explosion_collision: CollisionShape2D = $ExplosionHitbox/ExplosionCollision
+@onready var launch_sfx: AudioStreamPlayer2D = $Audio/Lauch
 
 var entity_blacklist: Array[Entity] = []
 
@@ -14,7 +15,7 @@ func _ready() -> void:
 	fireball_collision.disabled = false
 	fireball_sprite.visible = true
 	explosion_sprite.visible = false
-	
+	launch_sfx.play(0.2)
 	animation_player.play("loop")
 
 

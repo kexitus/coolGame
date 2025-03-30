@@ -448,4 +448,7 @@ player = NodePath("../..")
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
 
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+current = true
+
 [connection signal="timeout" from="Timers/InvulnerabityTimer" to="." method="_on_invulnerabity_timer_timeout"]

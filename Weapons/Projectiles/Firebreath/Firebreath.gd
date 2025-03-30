@@ -1,14 +1,18 @@
 class_name PrjFirebreath
 extends Projectile
 
+@onready var hold_sfx: AudioStreamPlayer2D = $Audio/Hold
+
 @export var damage_tick_rate: float = 0.1  # Как часто наносить урон (10 раз в секунду)
 var targets: Array[EntityMob] = []
 var damage_timer: float = 0.0
 
 func _physics_process(delta: float) -> void:
 	if !visible:
+		hold_sfx.stop()
 		return
-		
+	if ! hold_sfx.playing:
+		hold_sfx.play()
 	damage_timer += delta
 	if damage_timer >= damage_tick_rate:
 		damage_timer = 0.0
