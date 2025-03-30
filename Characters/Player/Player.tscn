@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bu172clhhjfrv"]
+[gd_scene load_steps=36 format=3 uid="uid://bu172clhhjfrv"]
 
 [ext_resource type="Script" uid="uid://ne6fgbif3nal" path="res://Characters/Player/EntityPlayer.gd" id="1_mdg8t"]
 [ext_resource type="Script" uid="uid://bdw5cx2lw0qdq" path="res://Characters/StateMachineBase/FiniteStateMachine.gd" id="2_jsp3y"]
@@ -25,6 +25,7 @@
 [ext_resource type="Script" uid="uid://c43vk2m0gdbnc" path="res://Characters/Player/StateMachines/Hands/RuleToAttacking.gd" id="15_1dgtb"]
 [ext_resource type="Script" uid="uid://pte77ci27t74" path="res://Characters/Player/StateMachines/Hands/StateAttacking.gd" id="15_qvoiu"]
 [ext_resource type="Script" uid="uid://cinhokgwh037k" path="res://Characters/Player/StateMachines/Hands/RuleToPassive.gd" id="17_oc3cy"]
+[ext_resource type="Script" uid="uid://bc13vcbqk42o1" path="res://Characters/Player/SignsVisualizer.gd" id="25_mvuje"]
 [ext_resource type="PackedScene" uid="uid://b5motob0s7m2k" path="res://Weapons/Special/Fireball/WpnFireball.tscn" id="26_11ayp"]
 
 [sub_resource type="Animation" id="Animation_epsh5"]
@@ -410,6 +411,9 @@ texture = ExtResource("4_uqh1q")
 hframes = 2
 vframes = 2
 frame = 1
+
+[node name="SignsVisualizer" type="Node2D" parent="."]
+script = ExtResource("25_mvuje")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)

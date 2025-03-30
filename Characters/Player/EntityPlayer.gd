@@ -9,6 +9,8 @@ extends Entity
 
 @export var cast_marker: Marker2D
 
+@onready var signs_visualizer: SignsVisualizer = $SignsVisualizer
+
 @export var max_mana: float = 10.0
 var mana: float = max_mana
 var money: int = 0

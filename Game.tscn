@@ -10,8 +10,9 @@ script = ExtResource("1_iscg5")
 
 [node name="UserInterface" parent="." instance=ExtResource("1_ca7y4")]
 
-[node name="Player" parent="." instance=ExtResource("4_le562")]
+[node name="Player" parent="." node_paths=PackedStringArray("special_weapons") instance=ExtResource("4_le562")]
 z_index = 100
+special_weapons = [NodePath("Weapons/WpnFireball"), null, null]
 
 [node name="Rooms" type="Node2D" parent="."]
 script = ExtResource("3_441xx")
