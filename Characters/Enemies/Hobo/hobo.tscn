@@ -1,7 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://bcsu46jn18v84"]
+[gd_scene load_steps=19 format=3 uid="uid://bcsu46jn18v84"]
 
 [ext_resource type="PackedScene" uid="uid://shjqvn85bxuk" path="res://Characters/Enemies/Enemy.tscn" id="1_ffalr"]
-[ext_resource type="Script" uid="uid://dknw6jtm6rgs0" path="res://Characters/Enemies/Hobo/Hobo.gd" id="2_ijmwo"]
+[ext_resource type="Script" uid="uid://dknw6jtm6rgs0" path="res://Characters/Enemies/Hobo/hobo.gd" id="2_ijmwo"]
 [ext_resource type="Texture2D" uid="uid://o0ctk7gg10to" path="res://Characters/Enemies/Hobo/Hobo.png" id="2_xiynl"]
 [ext_resource type="Script" uid="uid://bdw5cx2lw0qdq" path="res://Characters/StateMachineBase/FiniteStateMachine.gd" id="3_7o4xr"]
 [ext_resource type="AnimationLibrary" uid="uid://com23fsh6wuui" path="res://Characters/Enemies/AnimLibTemp.res" id="3_smofr"]
@@ -105,6 +105,12 @@ _data = {
 &"shoot_recovery": SubResource("Animation_k45ye")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_y1cut"]
+radius = 88.3629
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7ogbu"]
+radius = 112.285
+
 [node name="Hobo" instance=ExtResource("1_ffalr")]
 script = ExtResource("2_ijmwo")
 
@@ -151,7 +157,7 @@ animationPlayer = NodePath("../../../Animation/BodyAnimation")
 [node name="BodyAnimation" type="AnimationPlayer" parent="Animation" index="0"]
 root_node = NodePath("../../Character")
 libraries = {
-"": ExtResource("3_smofr")
+&"": ExtResource("3_smofr")
 }
 
 [node name="Weapon" parent="." index="2" instance=ExtResource("4_lhbmd")]
@@ -161,14 +167,33 @@ rotation = -0.273674
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Weapon" index="2"]
 libraries = {
-"": SubResource("AnimationLibrary_rlt4n")
+&"": SubResource("AnimationLibrary_rlt4n")
 }
 
 [node name="Character" parent="." index="4"]
 texture = ExtResource("2_xiynl")
 
-[node name="HitBox" parent="." index="6"]
-visible = false
-
 [node name="Navigation" parent="." index="7"]
 visible = true
+
+[node name="Aggr" parent="." index="8"]
+visible = true
+
+[node name="ScaryRange" type="Area2D" parent="Aggr" index="1"]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Aggr/ScaryRange" index="0"]
+shape = SubResource("CircleShape2D_y1cut")
+
+[node name="OptimalRange" type="Area2D" parent="Aggr" index="2"]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Aggr/OptimalRange" index="0"]
+shape = SubResource("CircleShape2D_7ogbu")
+
+[connection signal="area_entered" from="Aggr/ScaryRange" to="." method="_on_scary_range_area_entered"]
+[connection signal="area_exited" from="Aggr/ScaryRange" to="." method="_on_scary_range_area_exited"]
+[connection signal="area_entered" from="Aggr/OptimalRange" to="." method="_on_optimal_range_area_entered"]
+[connection signal="area_exited" from="Aggr/OptimalRange" to="." method="_on_optimal_range_area_exited"]

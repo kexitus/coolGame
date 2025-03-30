@@ -12,16 +12,16 @@ layer_2/tile_data = PackedInt32Array(1507306, 327681, 1342177295, 1441770, 39321
 layer_3/tile_data = PackedInt32Array(655347, 786433, 1610612739, 917493, 786433, 3, 786421, 655361, 1610612738, 917497, 720897, 1342177283, 655354, 655361, 3, 196589, 458753, 1342177293, 262125, 524289, 1342177294, 327661, 458753, 1342177295, 1310701, 458753, 1342177295, 1376237, 524289, 1342177294, 1441773, 458753, 1342177294, 720872, 720897, 3, 327655, 786433, 1342177283, 1310695, 720897, 1342177282, 524267, 786433, 1342177282, 196587, 720897, 1342177283, 983021, 655361, 3, 589804, 655361, 1342177284, 1114088, 655361, 1342177284, 1114092, 589825, 1342177284, 655350, 589825, 1342177284, 983033, 851969, 1342177285)
 
 [node name="Position" type="Marker2D" parent="Entrance" index="0"]
-position = Vector2(192, 416)
+position = Vector2(192, 0)
 
 [node name="Left" type="Marker2D" parent="Exits" index="0"]
-position = Vector2(0, 112)
+position = Vector2(0, 368)
 
 [node name="Left2" type="Marker2D" parent="Exits" index="1"]
-position = Vector2(384, 112)
+position = Vector2(384, 368)
 
 [node name="Door" type="StaticBody2D" parent="Doors" index="0"]
-position = Vector2(376, 112)
+position = Vector2(376, 368)
 
 [node name="Door2" type="StaticBody2D" parent="Doors" index="1"]
-position = Vector2(8, 112)
+position = Vector2(8, 368)
