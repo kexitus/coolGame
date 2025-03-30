@@ -105,17 +105,13 @@ _data = {
 &"shoot_recovery": SubResource("Animation_k45ye")
 }
 
-<<<<<<< HEAD
-[node name="Hobo" node_paths=PackedStringArray("bottle") instance=ExtResource("1_ffalr")]
-=======
 [sub_resource type="CircleShape2D" id="CircleShape2D_y1cut"]
 radius = 88.3629
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7ogbu"]
 radius = 112.285
 
-[node name="Hobo" instance=ExtResource("1_ffalr")]
->>>>>>> origin/main
+[node name="Hobo" node_paths=PackedStringArray("bottle") instance=ExtResource("1_ffalr")]
 script = ExtResource("2_ijmwo")
 bottle = NodePath("Weapon")
 
@@ -179,9 +175,6 @@ libraries = {
 texture = ExtResource("2_xiynl")
 
 [node name="Navigation" parent="." index="7"]
-visible = true
-
-[node name="Aggr" parent="." index="8"]
 visible = true
 
 [node name="ScaryRange" type="Area2D" parent="Aggr" index="1"]

@@ -69,6 +69,3 @@ visible = false
 
 [node name="Navigation" parent="." index="6"]
 visible = true
-
-[node name="Aggr" parent="." index="7"]
-visible = true
