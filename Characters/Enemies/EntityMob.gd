@@ -13,10 +13,8 @@ extends Entity
 @export var attack_damage: float = 1.0
 @export_group("")
 
-var target: Entity = null
-var player_chase = false
-var player = null
-var alive = true
+var player_chase: bool = false
+var alive: bool = true
 var target_node: Node2D = null
 
 signal aggroed(target: Entity)
@@ -33,19 +31,14 @@ func _process(_delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if navigation_agent.is_navigation_finished():
-		return
-	
-	if alive:
-		handle_movement(delta)
-		handle_look()
-	
+	handle_ai(delta)
 	move_and_slide()
 
 
-func update_ai() -> void:
-	pass
-
+func handle_ai(delta: float) -> void:
+	if alive:
+		handle_movement(delta)
+		handle_look()
 
 func attack() -> void:
 	pass
@@ -62,22 +55,15 @@ func handle_look() -> void:
 
 # :Entity.
 func handle_movement(delta: float) -> void:
+	if navigation_agent.is_navigation_finished():
+		return
+		
 	if player_chase:
 		var axis = to_local(navigation_agent.get_next_path_position()).normalized()
 		position += axis * movement_speed * delta
 		velocity = velocity.lerp(axis * movement_speed * delta, acceleration)
 	else:
 		velocity = velocity.lerp(Vector2.ZERO, friction)
-
-
-# :Entity.
-func update_animation(_delta: float) -> void:
-	pass
-
-
-# :Entity.
-func get_interaction() -> void:
-	pass
 
 
 # :Entity.

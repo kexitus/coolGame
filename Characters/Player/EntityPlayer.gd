@@ -1,10 +1,6 @@
 class_name EntityPlayer
 extends Entity
 
-@export var body_state_machine: FiniteStateMachine
-@export var invulnerability_state_machine: FiniteStateMachine
-@export var hands_state_machine: FiniteStateMachine
-
 @export var invulnerability_timer: Timer
 
 @export var cast_marker: Marker2D
@@ -15,7 +11,6 @@ extends Entity
 var mana: float = max_mana
 var money: int = 0
 var signs: Array[GlobalData.SIGNS] = []
-var basic_weapons: Array[WeaponBasic] = []
 var items: Array[Item] = []
 
 @export_group("Weapons")
@@ -28,7 +23,7 @@ signal signs_changed(new_signs: Array[GlobalData.SIGNS])
 signal basic_weapon_changed(new_weapon: WeaponBasic)
 signal using_special_weapon(special_weapon: WeaponSpecial)
 signal special_weapon_changed(new_weapon: WeaponSpecial, index: int)
-
+signal mana_changed(new_mana: float)
 
 func _ready() -> void:
 	if basic_weapon:
@@ -125,8 +120,13 @@ func handle_sign(new_sign: GlobalData.SIGNS) -> void:
 func handle_special_attack(combo: Array[GlobalData.SIGNS]) -> void:
 	var weapon: WeaponSpecial = find_weapon(combo)
 	if weapon:
-		using_special_weapon.emit(weapon)
-		weapon.attack(cast_marker.global_position, get_global_mouse_position())
+		if mana >= weapon.mana_cost:
+			using_special_weapon.emit(weapon)
+			weapon.attack(cast_marker.global_position, get_global_mouse_position())
+			mana -= weapon.mana_cost
+			mana_changed.emit(mana)
+		else:
+			print("Not enough mana")
 
 
 # Finds special weapon by combo sequence
@@ -181,13 +181,3 @@ func _on_invulnerabity_timer_timeout() -> void:
 	is_invulnerable = false
 
 #endregion
-
-
-# :Entity.
-func update_animation(_delta: float) -> void:
-	pass
-
-
-# :Entity.
-func get_interaction() -> void:
-	pass

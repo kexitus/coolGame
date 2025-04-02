@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bu172clhhjfrv" path="res://Characters/Player/Player.tscn" id="2_eif7t"]
 [ext_resource type="PackedScene" uid="uid://bcsu46jn18v84" path="res://Characters/Enemies/Hobo/hobo.tscn" id="3_0k34h"]
 [ext_resource type="PackedScene" uid="uid://c3a8fddvup3xl" path="res://UI/InfoPlayer.tscn" id="5_6to27"]
-[ext_resource type="PackedScene" uid="uid://bmwp5mrqqynno" path="res://Characters/Enemies/Skeleton/skeleton.tscn" id="7_hqf65"]
+[ext_resource type="PackedScene" uid="uid://bmwp5mrqqynno" path="res://Characters/Enemies/Skeleton/Skeleton.tscn" id="7_hqf65"]
 [ext_resource type="PackedScene" uid="uid://h83j15dc6d6p" path="res://Characters/Enemies/Rat/rat.tscn" id="8_fc275"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lec7d"]

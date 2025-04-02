@@ -5,6 +5,7 @@ extends Control
 
 @export_category("Show")
 @export var show_hp: bool = true
+@export var show_mana: bool = true
 @export var show_body_state: bool = true
 @export var show_invulnerability_state: bool = true
 @export var show_hands_state: bool = true
@@ -13,6 +14,7 @@ extends Control
 @onready var label: RichTextLabel = $RichTextLabel
 
 var hp: String = ""
+var mana: String = ""
 var body_state: String = ""
 var invulnerability_state: String = ""
 var hands_state: String = ""
@@ -21,6 +23,10 @@ func _ready() -> void:
 	if show_hp:
 		player.damage_taken.connect(update_hp)
 		hp = str(player.max_hp)
+	
+	if show_mana:
+		player.mana_changed.connect(update_mana)
+		mana = str(player.mana)
 	
 	if show_body_state:
 		player.body_state_machine.state_changed.connect(update_body_state)
@@ -51,6 +57,9 @@ func update_text() -> void:
 	if show_hp:
 		text += "HP: " + hp
 	
+	if show_mana:
+		text += "\nMana: " + mana
+	
 	if show_body_state:
 		text +=  "\nBody: " + body_state
 	
@@ -71,6 +80,11 @@ func update_text() -> void:
 
 func update_hp(_damage: float) -> void:
 	hp = str(player.hp)
+	update_text()
+
+
+func update_mana(new_mana: float) -> void:
+	mana = str(new_mana)
 	update_text()
 
 

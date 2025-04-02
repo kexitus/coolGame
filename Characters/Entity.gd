@@ -25,7 +25,6 @@ var is_active: bool = true
 var is_invulnerable: bool = false
 
 signal direction_changed(new_direction: Vector2)
-signal interaction_triggered()
 signal damage_taken(amount: float)
 signal died()
 
@@ -46,11 +45,7 @@ func handle_movement(delta: float) -> void:
 	pass
 
 
-func update_animation(delta: float) -> void:
-	pass
-
-
-func get_interaction() -> void:
+func handle_look() -> void:
 	pass
 
 
